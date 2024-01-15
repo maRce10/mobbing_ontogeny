@@ -1,0 +1,282 @@
+---
+title: "Mobbing ontogeny"
+output: html_document
+date: "2024-01-14"
+format:
+  html:
+    code-fold: true
+    code-tools: true
+    toc: true
+    df-print: kable
+editor_options: 
+  chunk_output_type: console
+---
+
+
+# Cargar paquetes {.unnumbered .unlisted}
+```{r, message=FALSE, warning=FALSE}
+
+sketchy::load_packages(c(
+  "googlesheets4",
+  "httpuv",
+  "ggplot2",
+  "kableExtra",
+  "viridis",
+  "brms",
+  github = "maRce10/brmsish",
+  "emmeans"
+))
+
+.print_df <- function(x, highlight = NULL, height = "300px",...) {
+  kbl <- kableExtra::kable(
+    as.data.frame(x)
+    ,
+    align = "c",
+    row.names = F,
+    format = "html",
+    escape = F
+  )
+  
+  if (!is.null(highlight))
+  kbl <- column_spec(kbl, column = which(names(x) %in% highlight), background = "#ccebff", bold = TRUE)
+    
+  kbl <-
+    kableExtra::kable_styling(kbl, bootstrap_options = "striped", font_size = 14)
+
+  
+  kbl <-
+    kableExtra::scroll_box(kbl, width = "800px", height = height)
+  
+  knitr::asis_output(kbl)
+}
+
+```
+
+# Predicciones
+
+## Aprendizaje
+```{r}
+
+acoso <- c(4, 2, 2, 0)
+estimulo <- c("Simpátrico", "Alopátrico", "Alopátrico +", "Control")
+
+sim_df <- data.frame(estimulo, acoso)
+
+set.seed(123)
+out <- lapply(seq_len(nrow(sim_df)), function(x){
+  
+  acoso <- rnorm(n = 30, mean = sim_df$acoso[x])
+  individuos <- rpois(n = 30, lambda = sim_df$acoso[x] / 2)
+
+  
+  data.frame(estimulo = sim_df$estimulo[x], acoso, individuos)
+})
+
+sim_data <- do.call(rbind, out)
+
+sim_data$estimulo <- factor(sim_data$estimulo, levels = c("Simpátrico", "Alopátrico", "Alopátrico +", "Control"))
+
+ggplot(sim_data, aes(x = estimulo, y = acoso)) +
+  geom_boxplot(outlier.alpha = 0, fill = viridis(10, alpha = 0.6)[7]) +
+  labs(x = "Estímulo", y = "Intensidad del acoso") + 
+  theme_classic(base_size = 24) +
+    theme(axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) 
+
+agg_data <- data.frame(estimulo = c("Simpátrico", "Alopátrico", "Alopátrico +", "Control"), individuos = c(15, 9, 9, 3))
+
+agg_data$estimulo <- factor(agg_data$estimulo, levels = c("Simpátrico", "Alopátrico", "Alopátrico +", "Control"))
+
+ggplot(agg_data, aes(x = estimulo, y = individuos)) +
+  geom_bar(stat="identity", fill = viridis(10, alpha = 0.4)[7], color = "black") +
+  labs(x = "Estímulo", y = "Número de individuos") + 
+  theme_classic(base_size = 24) +
+    theme(axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) 
+
+```
+
+## Innato
+```{r}
+
+acoso <- c(4, 4, 4, 1)
+estimulo <- c("Simpátrico", "Alopátrico", "Alopátrico +", "Control")
+
+sim_df <- data.frame(estimulo, acoso)
+
+set.seed(1)
+out <- lapply(seq_len(nrow(sim_df)), function(x){
+  
+  acoso <- rnorm(n = 30, mean = sim_df$acoso[x])
+  
+  individuos <- rpois(n = 30, lambda = sim_df$acoso[x] / 2)
+
+  data.frame(estimulo = sim_df$estimulo[x], acoso, individuos)
+})
+
+sim_data <- do.call(rbind, out)
+
+sim_data$estimulo <- factor(sim_data$estimulo, levels = c("Simpátrico", "Alopátrico", "Alopátrico +", "Control"))
+
+ggplot(sim_data, aes(x = estimulo, y = acoso)) +
+  geom_boxplot(outlier.alpha = 0, fill = viridis(10, alpha = 0.6)[7]) +
+  labs(x = "Estímulo", y = "Intensidad del acoso") + 
+  theme_classic(base_size = 24) +
+    theme(axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) 
+
+agg_data <- data.frame(estimulo = c("Simpátrico", "Alopátrico", "Alopátrico +", "Control"), individuos = c(4, 4, 4, 1))
+
+agg_data$estimulo <- factor(agg_data$estimulo, levels = c("Simpátrico", "Alopátrico", "Alopátrico +", "Control"))
+
+ggplot(agg_data, aes(x = estimulo, y = individuos)) +
+  geom_bar(stat="identity", fill = viridis(10, alpha = 0.4)[7], color = "black") +
+  labs(x = "Estímulo", y = "Número de individuos") + 
+  theme_classic(base_size = 24) +
+    theme(axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) 
+
+```
+
+
+# Leer datos desde google docs
+```{r,  message=FALSE, warning=FALSE}
+
+mob_data <- read_sheet('https://docs.google.com/spreadsheets/d/19MjQaAXfoMa59AchxTL4RC0TjGLVwHqvkotBXwn8G30/edit#gid=1949444895', na = "NA")
+
+mob_data$HORA <- format(as.POSIXct(mob_data$HORA), format = "%H:%M")
+
+.print_df(mob_data, height = "600px")
+```
+
+# Descripción de los datos
+
+- `r nrow(mob_data)` puntos de muestreo
+- `r sum(mob_data$INDIVIDUOS)` individuos observados
+- Un máximo de `r sum(mob_data$MORFOESPECIE)` morfoespecies observadas
+- `r round(sum(mob_data$INDIVIDUOS != 0)/nrow(mob_data) * 100, 0)`% de muestreos tuvieron respuesta (`r round(sum(mob_data$INDIVIDUOS[mob_data$EQUIPO == 1] != 0)/sum(mob_data$EQUIPO == 1) * 100, 0)`% de los muestreos del equipo 1 y `r round(sum(mob_data$INDIVIDUOS[mob_data$EQUIPO == 2] != 0)/sum(mob_data$EQUIPO == 2) * 100, 0)`% de los muestreos del equipo 2)
+
+
+# Resultados
+
+
+## Numero de individuos
+
+```{r}
+
+mob_data$estimulo <- factor(mob_data$ESTIMULO)
+
+mob_data$estimulo <- factor(mob_data$estimulo, labels = c("Control", "Alopátrico", "Simpátrico",  "Alopátrico +"))
+
+mob_data$estimulo <- factor(mob_data$estimulo, levels = c("Simpátrico", "Alopátrico", "Alopátrico +", "Control"))
+
+ggplot(mob_data, aes(x = estimulo, y = INDIVIDUOS)) +
+  geom_boxplot(outlier.alpha = 0, fill = viridis(10, alpha = 0.6)[7]) +
+  labs(x = "Estímulo", y = "Número de individuos") + 
+  theme_classic(base_size = 24) + ylim(c(0, 8)) 
+
+agg_data <- aggregate(INDIVIDUOS ~ estimulo, data = mob_data, FUN = sum)
+
+ggplot(agg_data, aes(x = estimulo, y = INDIVIDUOS)) +
+  geom_bar(stat="identity", fill = viridis(10, alpha = 0.6)[7], color = "black") +
+  labs(x = "Estímulo", y = "Número de individuos") + 
+  theme_classic(base_size = 24) 
+```
+
+## Numero de morfoespecies
+
+```{r}
+
+ggplot(mob_data, aes(x = estimulo, y = MORFOESPECIE)) +
+  geom_boxplot(outlier.alpha = 0, fill = viridis(10, alpha = 0.6)[7]) +
+  labs(x = "Estímulo", y = "Número de morfoespecies") + 
+  theme_classic(base_size = 24) 
+
+agg_data <- aggregate(MORFOESPECIE ~ estimulo, data = mob_data, FUN = sum)
+
+agg_data$MORFOESPECIE <- c(9, 5, 6, 0)
+
+ggplot(agg_data, aes(x = estimulo, y = MORFOESPECIE)) +
+  geom_bar(stat="identity", fill = viridis(10, alpha = 0.6)[7], color = "black") +
+  labs(x = "Estímulo", y = "Número de morfoespecies") + 
+  theme_classic(base_size = 24) 
+
+```
+
+
+# Análisis estadístico
+
+## Numero de individuos
+```{r, eval = FALSE}
+
+iter <- 5000
+chains <- 4
+priors <- c(prior(normal(0, 6), class = "b"))
+
+set.seed(123)
+
+mod_indiv <- brm(formula = INDIVIDUOS ~ estimulo, family = poisson, 
+    data = mob_data, prior = priors, iter = iter, chains = chains,
+    cores = chains, control = list(adapt_delta = 0.99, max_treedepth = 15),
+    file = "./data/raw/individuos.RDS", file_refit = "always")
+
+
+mod_mor <- brm(formula = MORFOESPECIE ~ estimulo, family = poisson, 
+    data = mob_data, prior = priors, iter = iter, chains = chains,
+    cores = chains, control = list(adapt_delta = 0.99, max_treedepth = 15),
+    file = "./data/raw/morpfoespecie.RDS", file_refit = "always")
+
+```
+
+
+```{r, results='asis'}
+
+extended_summary(read.file = "../data/raw/individuos.RDS",
+    n.posterior = 1000, fill = viridis(10)[7], trace.palette = viridis,
+    highlight = TRUE, remove.intercepts = TRUE)
+
+```
+
+### Contrastes
+```{r, results='asis'}
+mod <- readRDS("../data/raw/individuos.RDS")
+
+cntrs <- as.data.frame(emmeans(mod, pairwise ~ estimulo)$contrasts)
+names(cntrs)[3:4] <- c("l-95% CI", "u-95% CI")
+
+coef_table <- brmsish:::html_format_coef_table(cntrs, highlight = TRUE, fill = viridis(10)[7])
+
+print(coef_table)
+```
+
+## Numero de morfoespecies
+```{r, results='asis'}
+
+extended_summary(read.file = "../data/raw/morpfoespecie.RDS",
+    n.posterior = 1000, fill = viridis(10)[7], trace.palette = viridis,
+    highlight = TRUE, remove.intercepts = TRUE)
+
+```
+
+### Contrastes
+```{r, results='asis'}
+mod <- readRDS("../data/raw/morpfoespecie.RDS")
+
+cntrs <- as.data.frame(emmeans(mod, pairwise ~ estimulo)$contrasts)
+names(cntrs)[3:4] <- c("l-95% CI", "u-95% CI")
+
+coef_table <- brmsish:::html_format_coef_table(cntrs, highlight = TRUE, fill = viridis(10)[7])
+
+```
+
+
+------------------------------------------------------------------------
+
+## Información de la sesión {.unnumbered .unlisted}
+
+```{r session info, echo=F}
+
+sessionInfo()
+
+```
+
