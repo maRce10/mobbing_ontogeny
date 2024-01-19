@@ -254,7 +254,7 @@ mod <- readRDS("./data/raw/individuos.RDS")
 
 extended_summary(fit = mod,
     n.posterior = 1000, fill = viridis(10)[7], trace.palette = viridis,
-    highlight = TRUE, remove.intercepts = TRUE, fit.name = FALSE)
+    highlight = TRUE, remove.intercepts = TRUE, fit.name = "regresion")
 
 ```
 
@@ -276,7 +276,7 @@ mod <- readRDS("./data/raw/morpfoespecie.RDS")
 
 extended_summary(fit = mod,
     n.posterior = 1000, fill = viridis(10)[7], trace.palette = viridis,
-    highlight = TRUE, remove.intercepts = TRUE, fit.name = FALSE)
+    highlight = TRUE, remove.intercepts = TRUE, fit.name = "regresion")
 
 ```
 
@@ -288,6 +288,7 @@ names(cntrs)[3:4] <- c("l-95% CI", "u-95% CI")
 
 coef_table <- brmsish:::html_format_coef_table(cntrs, highlight = TRUE, fill = viridis(10)[7])
 
+print(coef_table)
 ```
 
 
