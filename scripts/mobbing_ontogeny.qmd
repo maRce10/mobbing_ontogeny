@@ -37,8 +37,6 @@ if (file.exists("./.git/config")){
 ```{r, message=FALSE, warning=FALSE}
 
 sketchy::load_packages(c(
-  "googlesheets4",
-  "httpuv",
   "ggplot2",
   "kableExtra",
   "viridis",
@@ -97,7 +95,7 @@ sim_data <- do.call(rbind, out)
 sim_data$estimulo <- factor(sim_data$estimulo, levels = c("Simpátrico", "Alopátrico", "Alopátrico +", "Control"))
 
 ggplot(sim_data, aes(x = estimulo, y = acoso)) +
-  geom_boxplot(outlier.alpha = 0, fill = viridis(10, alpha = 0.6)[7]) +
+  geom_boxplot(outlier.alpha = 0, fill = mako(10, alpha = 0.6)[7]) +
   labs(x = "Estímulo", y = "Intensidad del acoso") + 
   theme_classic(base_size = 24) +
     theme(axis.text.y=element_blank(),
@@ -108,7 +106,7 @@ agg_data <- data.frame(estimulo = c("Simpátrico", "Alopátrico", "Alopátrico +
 agg_data$estimulo <- factor(agg_data$estimulo, levels = c("Simpátrico", "Alopátrico", "Alopátrico +", "Control"))
 
 ggplot(agg_data, aes(x = estimulo, y = individuos)) +
-  geom_bar(stat="identity", fill = viridis(10, alpha = 0.4)[7], color = "black") +
+  geom_bar(stat="identity", fill = mako(10, alpha = 0.4)[7], color = "black") +
   labs(x = "Estímulo", y = "Número de individuos") + 
   theme_classic(base_size = 24) +
     theme(axis.text.y=element_blank(),
@@ -139,7 +137,7 @@ sim_data <- do.call(rbind, out)
 sim_data$estimulo <- factor(sim_data$estimulo, levels = c("Simpátrico", "Alopátrico", "Alopátrico +", "Control"))
 
 ggplot(sim_data, aes(x = estimulo, y = acoso)) +
-  geom_boxplot(outlier.alpha = 0, fill = viridis(10, alpha = 0.6)[7]) +
+  geom_boxplot(outlier.alpha = 0, fill = mako(10, alpha = 0.6)[7]) +
   labs(x = "Estímulo", y = "Intensidad del acoso") + 
   theme_classic(base_size = 24) +
     theme(axis.text.y=element_blank(),
@@ -150,7 +148,7 @@ agg_data <- data.frame(estimulo = c("Simpátrico", "Alopátrico", "Alopátrico +
 agg_data$estimulo <- factor(agg_data$estimulo, levels = c("Simpátrico", "Alopátrico", "Alopátrico +", "Control"))
 
 ggplot(agg_data, aes(x = estimulo, y = individuos)) +
-  geom_bar(stat="identity", fill = viridis(10, alpha = 0.4)[7], color = "black") +
+  geom_bar(stat="identity", fill = mako(10, alpha = 0.4)[7], color = "black") +
   labs(x = "Estímulo", y = "Número de individuos") + 
   theme_classic(base_size = 24) +
     theme(axis.text.y=element_blank(),
@@ -159,14 +157,13 @@ ggplot(agg_data, aes(x = estimulo, y = individuos)) +
 ```
 
 
-# Leer datos desde google docs
+# Leer datos
 ```{r,  message=FALSE, warning=FALSE}
 
-mob_data <- read_sheet('https://docs.google.com/spreadsheets/d/19MjQaAXfoMa59AchxTL4RC0TjGLVwHqvkotBXwn8G30/edit#gid=1949444895', na = "NA")
+mob_data <- read.csv("./data/raw/data_v2.csv",na.strings = "NA")
 
-mob_data$HORA <- format(as.POSIXct(mob_data$HORA), format = "%H:%M")
+mob_data$HORA <- format(strptime(mob_data$HORA, "%H:%M"), "%H:%M")
 
-.print_df(mob_data, height = "600px")
 ```
 
 # Descripción de los datos
@@ -191,14 +188,14 @@ mob_data$estimulo <- factor(mob_data$estimulo, labels = c("Control", "Alopátric
 mob_data$estimulo <- factor(mob_data$estimulo, levels = c("Simpátrico", "Alopátrico", "Alopátrico +", "Control"))
 
 ggplot(mob_data, aes(x = estimulo, y = INDIVIDUOS)) +
-  geom_boxplot(outlier.alpha = 0, fill = viridis(10, alpha = 0.6)[7]) +
+  geom_boxplot(outlier.alpha = 0, fill = mako(10, alpha = 0.6)[7]) +
   labs(x = "Estímulo", y = "Número de individuos") + 
   theme_classic(base_size = 24) + ylim(c(0, 8)) 
 
 agg_data <- aggregate(INDIVIDUOS ~ estimulo, data = mob_data, FUN = sum)
 
 ggplot(agg_data, aes(x = estimulo, y = INDIVIDUOS)) +
-  geom_bar(stat="identity", fill = viridis(10, alpha = 0.6)[7], color = "black") +
+  geom_bar(stat="identity", fill = mako(10, alpha = 0.6)[7], color = "black") +
   labs(x = "Estímulo", y = "Número de individuos") + 
   theme_classic(base_size = 24) 
 ```
@@ -208,7 +205,7 @@ ggplot(agg_data, aes(x = estimulo, y = INDIVIDUOS)) +
 ```{r}
 
 ggplot(mob_data, aes(x = estimulo, y = MORFOESPECIE)) +
-  geom_boxplot(outlier.alpha = 0, fill = viridis(10, alpha = 0.6)[7]) +
+  geom_boxplot(outlier.alpha = 0, fill = mako(10, alpha = 0.6)[7]) +
   labs(x = "Estímulo", y = "Número de morfoespecies") + 
   theme_classic(base_size = 24) 
 
@@ -217,7 +214,7 @@ agg_data <- aggregate(MORFOESPECIE ~ estimulo, data = mob_data, FUN = sum)
 agg_data$MORFOESPECIE <- c(9, 5, 6, 0)
 
 ggplot(agg_data, aes(x = estimulo, y = MORFOESPECIE)) +
-  geom_bar(stat="identity", fill = viridis(10, alpha = 0.6)[7], color = "black") +
+  geom_bar(stat="identity", fill = mako(10, alpha = 0.6)[7], color = "black") +
   labs(x = "Estímulo", y = "Número de morfoespecies") + 
   theme_classic(base_size = 24) 
 
@@ -253,7 +250,7 @@ mod_mor <- brm(formula = MORFOESPECIE ~ estimulo, family = poisson,
 mod <- readRDS("./data/raw/individuos.RDS")
 
 extended_summary(fit = mod,
-    n.posterior = 1000, fill = viridis(10)[7], trace.palette = viridis,
+    n.posterior = 1000, fill = mako(10)[7], trace.palette = mako,
     highlight = TRUE, remove.intercepts = TRUE, fit.name = "regresion")
 
 ```
@@ -264,7 +261,7 @@ extended_summary(fit = mod,
 cntrs <- as.data.frame(emmeans(mod, pairwise ~ estimulo)$contrasts)
 names(cntrs)[3:4] <- c("l-95% CI", "u-95% CI")
 
-coef_table <- brmsish:::html_format_coef_table(cntrs, highlight = TRUE, fill = viridis(10)[7])
+coef_table <- brmsish:::html_format_coef_table(cntrs, highlight = TRUE, fill = mako(10)[7])
 
 print(coef_table)
 ```
@@ -275,7 +272,7 @@ print(coef_table)
 mod <- readRDS("./data/raw/morpfoespecie.RDS")
 
 extended_summary(fit = mod,
-    n.posterior = 1000, fill = viridis(10)[7], trace.palette = viridis,
+    n.posterior = 1000, fill = mako(10)[7], trace.palette = mako,
     highlight = TRUE, remove.intercepts = TRUE, fit.name = "regresion")
 
 ```
@@ -286,7 +283,7 @@ extended_summary(fit = mod,
 cntrs <- as.data.frame(emmeans(mod, pairwise ~ estimulo)$contrasts)
 names(cntrs)[3:4] <- c("l-95% CI", "u-95% CI")
 
-coef_table <- brmsish:::html_format_coef_table(cntrs, highlight = TRUE, fill = viridis(10)[7])
+coef_table <- brmsish:::html_format_coef_table(cntrs, highlight = TRUE, fill = mako(10)[7])
 
 print(coef_table)
 ```
