@@ -4,7 +4,6 @@ project:
   render:
     - index.qmd
     - scripts/1_statistical_analysis.qmd
-    - scripts/mobbing_ontogeny.qmd
 
 execute:
   freeze: auto
@@ -22,8 +21,6 @@ website:
         text: Home
       - href: scripts/1_statistical_analysis.qmd
         text: Statistical analysis
-      - href: scripts/mobbing_ontogeny.qmd
-        text: Preliminary analysis (2024)
     right:
       - icon: github
         href: https://github.com/maRce10/mobbing_ontogeny
