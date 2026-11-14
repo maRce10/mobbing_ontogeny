@@ -1,0 +1,302 @@
+---
+title: "Statistical analysis"
+subtitle: "Mobbing responses of tropical passerines to sympatric and allopatric owl vocalizations"
+author: "Marcelo Araya-Salas"
+date: "`r Sys.Date()`"
+toc: true
+toc-depth: 2
+toc-location: left
+number-sections: true
+highlight-style: pygments
+format:
+  html:
+    df-print: kable
+    code-fold: true
+    code-tools: true
+    css: qmd.css
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, echo = FALSE, message = FALSE, warning = FALSE}
+
+knitr::opts_knit$set(root.dir = "..")
+
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  dpi = 150, # with fig.retina = 2 (default) plots are saved at 300 dpi
+  fig.retina = 2
+)
+
+```
+
+```{r load packages}
+
+suppressPackageStartupMessages({
+  library(brms)
+  library(emmeans)
+  library(loo)
+  library(ggplot2)
+  library(bayesplot)
+  library(viridis)
+  library(kableExtra)
+})
+
+dir.create("output/figures", showWarnings = FALSE, recursive = TRUE)
+dir.create("data/processed/models", showWarnings = FALSE, recursive = TRUE)
+
+stim_cols <- setNames(mako(10)[c(3, 5, 7, 9)], c("Sympatric", "Allopatric", "Allopatric+", "Control"))
+
+```
+
+# Data
+
+Each row is a playback trial. `INDIVIDUOS` is the number of responding birds (response records) and `MORFOESPECIE` the number of responding species and morphospecies.
+
+```{r read data}
+
+d <- read.csv("data/raw/data_v2.csv", na.strings = "NA", check.names = FALSE)
+names(d) <- trimws(names(d))
+
+d$year <- factor(substr(d$FECHA, 7, 10))
+d$stimulus <- factor(d$ESTIMULO, levels = c("GLCR", "GLBR", "GLEU", "BADE"),
+                     labels = c("Sympatric", "Allopatric", "Allopatric+", "Control"))
+
+# Sampling site: point number within team transect. Team 3 (18 Jan 2024)
+# revisited team-2 point 19; 2026 points 1-4 revisited team-1 points 1-4.
+team <- ifelse(d$EQUIPO == 3, 2, d$EQUIPO)
+d$site <- factor(paste0("T", team, "_P", d$PUNTO))
+
+```
+
+- Stimuli: *Glaucidium costaricanum* (sympatric, GLCR), *G. brasilianum* (allopatric with range overlap elsewhere, GLBR), *G. passerinum* (strictly allopatric, GLEU) and *Basileuterus delattrii* (non-predator control, BADE)
+- `r nrow(d)` trials at `r nlevels(d$site)` sites (`r sum(d$year == "2024")` in 2024, `r sum(d$year == "2026")` in 2026)
+- `r sum(d$INDIVIDUOS)` response records; `r round(mean(d$INDIVIDUOS > 0) * 100)`% of trials had at least one response
+
+## Sampling design
+
+```{r design tables}
+
+kbl(table(Stimulus = d$stimulus, Year = d$year), caption = "Trials per stimulus and year") |>
+  kable_styling(full_width = FALSE)
+
+kbl(as.data.frame(table(table(d$site))), col.names = c("Trials per site", "Number of sites"),
+    caption = "Number of trials per site") |>
+  kable_styling(full_width = FALSE)
+
+```
+
+## Responses by stimulus
+
+```{r summary by stimulus}
+
+agg <- aggregate(cbind(Trials = 1, `Trials with response` = INDIVIDUOS > 0,
+                       `Responding birds` = INDIVIDUOS, `Responding species` = MORFOESPECIE) ~ stimulus,
+                 data = d, FUN = sum)
+
+kbl(agg, col.names = c("Stimulus", names(agg)[-1])) |>
+  kable_styling(full_width = FALSE)
+
+cat("Proportion of zeros:", round(mean(d$INDIVIDUOS == 0), 2),
+    "| mean:", round(mean(d$INDIVIDUOS), 2), "| variance:", round(var(d$INDIVIDUOS), 2))
+
+```
+
+# Statistical models
+
+Each response was modeled with a Bayesian generalized linear mixed model with stimulus and year as fixed effects and site as a random intercept. Poisson and negative binomial distributions (log link) were compared. Fixed effects had `normal(0, 6)` priors; the intercept and site standard deviation used brms defaults. Each model was run with 4 chains of 10,000 iterations (5,000 warm-up). Models are cached in `data/processed/models/`.
+
+```{r model settings}
+
+iter <- 10000
+warmup <- 5000
+chains <- 4
+pri <- c(prior(normal(0, 6), class = "b"))
+ctrl <- list(adapt_delta = 0.99, max_treedepth = 15)
+
+fit <- function(resp, fam, prior = pri, name) {
+  # negative binomial with non-overdispersed counts lets the shape parameter
+  # drift to infinity, which is very slow: use init = 0 and a lighter control
+  is_nb <- fam$family == "negbinomial"
+  f <- bf(as.formula(paste(resp, "~ stimulus + year + (1 | site)")))
+  brm(f, family = fam, data = d, prior = prior, iter = iter, warmup = warmup,
+      chains = chains, cores = chains, seed = 123,
+      control = if (is_nb) list(adapt_delta = 0.95, max_treedepth = 12) else ctrl,
+      init = if (is_nb) 0 else "random",
+      file = file.path("data/processed/models", name), file_refit = "on_change")
+}
+
+responses <- c(INDIVIDUOS = "Number of responding birds", MORFOESPECIE = "Number of responding species")
+
+```
+
+```{r fit models, results = "hide"}
+
+mods <- list()
+
+for (resp in names(responses)) {
+  mods[[resp]] <- list(
+    pois = fit(resp, poisson(), name = paste0(resp, "_pois")),
+    nb = fit(resp, negbinomial(), name = paste0(resp, "_nb")),
+    prior2 = fit(resp, poisson(), prior = set_prior("normal(0, 2)", class = "b"), name = paste0(resp, "_pois_prior2")),
+    prior10 = fit(resp, poisson(), prior = set_prior("normal(0, 10)", class = "b"), name = paste0(resp, "_pois_prior10"))
+  )
+}
+
+```
+
+```{r helper functions}
+
+coef_table <- function(m) {
+  s <- summary(m)
+  out <- rbind(s$fixed, s$random$site)
+  out <- out[, c("Estimate", "l-95% CI", "u-95% CI", "Rhat", "Bulk_ESS", "Tail_ESS")]
+  rownames(out)[nrow(out)] <- "sd(site)"
+  out
+}
+
+contrast_table <- function(m) {
+  out <- as.data.frame(emmeans(m, pairwise ~ stimulus)$contrasts)
+  out$`response ratio` <- exp(out$estimate)
+  out$credible <- out$lower.HPD > 0 | out$upper.HPD < 0
+  out
+}
+
+print_contrasts <- function(x) {
+  kbl(x[, c("contrast", "estimate", "lower.HPD", "upper.HPD", "response ratio")],
+      digits = 3, col.names = c("Contrast", "Estimate (log)", "95% HPD lower", "95% HPD upper", "Response ratio"),
+      row.names = FALSE) |>
+    kable_styling(full_width = FALSE) |>
+    row_spec(which(x$credible), bold = TRUE)
+}
+
+```
+
+::: {.callout-note}
+Contrasts are posterior medians and 95% highest posterior density intervals (HPD) on the log scale, averaged over years. Contrasts in **bold** have 95% HPD that exclude zero. Response ratios are exponentiated contrasts.
+:::
+
+```{r results by response, results = "asis"}
+
+for (resp in names(responses)) {
+  m <- mods[[resp]]
+
+  cat("\n\n## ", responses[resp], "\n\n")
+
+  cat("\n\n### Poisson model coefficients\n\n")
+  print(kbl(coef_table(m$pois), digits = 3) |> kable_styling(full_width = FALSE))
+
+  cat("\n\n### Pairwise contrasts\n\n")
+  print(print_contrasts(contrast_table(m$pois)))
+
+  cat("\n\n### Poisson vs. negative binomial\n\n")
+  lp <- loo(m$pois)
+  ln <- loo(m$nb)
+  lc <- loo_compare(lp, ln)
+  lc <- data.frame(Model = c("Poisson", "Negative binomial")[as.integer(gsub("\\D", "", rownames(lc)))],
+                   `ELPD difference` = lc[, "elpd_diff"], SE = lc[, "se_diff"], check.names = FALSE)
+  print(kbl(lc, digits = 2, row.names = FALSE) |> kable_styling(full_width = FALSE))
+
+  cat("\n\nPosterior predictive p-values, P[T(yrep) >= T(y)]:\n\n")
+  y <- d[[resp]]
+  ppp <- sapply(list(Poisson = m$pois, `Negative binomial` = m$nb), function(x) {
+    yrep <- posterior_predict(x)
+    c(`Proportion of zeros` = mean(rowMeans(yrep == 0) >= mean(y == 0)),
+      Mean = mean(rowMeans(yrep) >= mean(y)),
+      Variance = mean(apply(yrep, 1, var) >= var(y)),
+      Maximum = mean(apply(yrep, 1, max) >= max(y)))
+  })
+  print(kbl(ppp, digits = 3) |> kable_styling(full_width = FALSE))
+
+  cat("\n\nNegative binomial contrasts:\n\n")
+  print(print_contrasts(contrast_table(m$nb)))
+
+  cat("\n\n### Prior sensitivity\n\n")
+  sens <- do.call(rbind, lapply(c(`normal(0, 2)` = "prior2", `normal(0, 6)` = "pois", `normal(0, 10)` = "prior10"), function(p) {
+    x <- contrast_table(m[[p]])
+    sprintf("%.2f (%.2f, %.2f)", x$estimate, x$lower.HPD, x$upper.HPD)
+  }))
+  colnames(sens) <- contrast_table(m$pois)$contrast
+  print(kbl(t(sens), caption = "Contrast estimates (log scale) and 95% HPD under three priors on the fixed effects") |>
+          kable_styling(full_width = FALSE))
+}
+
+```
+
+## MCMC diagnostics
+
+```{r trace plots, fig.width = 10, fig.height = 7}
+
+for (resp in names(responses)) {
+  print(mcmc_trace(as.array(mods[[resp]]$pois), regex_pars = "^b_|^sd_") +
+          ggtitle(paste(responses[resp], "(Poisson model)")))
+}
+
+```
+
+```{r posterior predictive checks, fig.width = 10, fig.height = 4.5}
+
+for (resp in names(responses)) {
+  print(bayesplot_grid(
+    pp_check(mods[[resp]]$pois, type = "bars", ndraws = 500) + ggtitle("Poisson"),
+    pp_check(mods[[resp]]$nb, type = "bars", ndraws = 500) + ggtitle("Negative binomial"),
+    grid_args = list(ncol = 2), titles = NULL))
+}
+
+```
+
+# Figures
+
+Letters are assigned from the pairwise contrasts of the Poisson models: stimuli sharing a letter did not differ credibly.
+
+```{r letters}
+
+# compact letter display from the credible contrasts
+cld <- function(ct, lv = levels(d$stimulus)) {
+  diff <- matrix(FALSE, length(lv), length(lv), dimnames = list(lv, lv))
+  pr <- strsplit(gsub("[()]", "", ct$contrast), " - ")
+  for (i in seq_along(pr)) diff[pr[[i]][1], pr[[i]][2]] <- diff[pr[[i]][2], pr[[i]][1]] <- ct$credible[i]
+  groups <- list()
+  for (s in lv) {
+    placed <- FALSE
+    for (g in seq_along(groups)) if (!any(diff[s, groups[[g]]])) { groups[[g]] <- c(groups[[g]], s); placed <- TRUE }
+    if (!placed) groups[[length(groups) + 1]] <- s
+  }
+  sapply(lv, function(s) paste(letters[which(sapply(groups, function(g) s %in% g))], collapse = ""))
+}
+
+```
+
+```{r figures, fig.width = 7, fig.height = 5.5}
+
+fig_files <- c(INDIVIDUOS = "fig3_responding_birds_by_stimulus.png",
+               MORFOESPECIE = "fig4_responding_species_by_stimulus.png")
+
+for (resp in names(responses)) {
+  lt <- cld(contrast_table(mods[[resp]]$pois))
+  lab <- data.frame(stimulus = names(lt), label = lt, y = max(d[[resp]]) * 1.08)
+
+  p <- ggplot(d, aes(x = stimulus, y = .data[[resp]], fill = stimulus)) +
+    geom_boxplot(outlier.shape = NA, alpha = 0.7) +
+    geom_jitter(width = 0.12, height = 0.1, alpha = 0.6, size = 2) +
+    geom_text(data = lab, aes(y = y, label = label), size = 6) +
+    scale_fill_manual(values = stim_cols, guide = "none") +
+    labs(x = "Stimulus", y = responses[resp]) +
+    theme_classic(base_size = 18)
+
+  ggsave(file.path("output/figures", fig_files[resp]), p, width = 7, height = 5.5, dpi = 300)
+  print(p)
+}
+
+```
+
+------------------------------------------------------------------------
+
+# Session information {.unnumbered .unlisted}
+
+```{r session info, echo = FALSE}
+
+sessionInfo()
+
+```

@@ -2,3 +2,20 @@
 .Rhistory
 .RData
 .Ruserdata
+/.quarto/
+
+# rendered website (built and deployed by .github/workflows/publish.yml)
+/_site/
+/docs/
+
+# rendered reports outside the website folder
+/scripts/*.html
+/scripts/*_files/
+
+# fitted brms models (large; refitted by scripts/1_statistical_analysis.qmd)
+data/processed/models/
+
+# manuscript drafts and reviewer comments (confidential while under review)
+manuscript/*.docx
+
+**/*.quarto_ipynb

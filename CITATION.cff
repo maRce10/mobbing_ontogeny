@@ -1,0 +1,51 @@
+cff-version: 1.2.0
+message: >-
+  If you use this code or data, please cite this repository. Once the
+  accompanying paper is published, please cite the paper as well.
+title: >-
+  Code and data for "Mobbing behavior in tropical passerine birds: an innate
+  and learned behavior"
+type: software
+authors:
+  - family-names: Sánchez
+    given-names: Natalie V.
+    orcid: https://orcid.org/0000-0002-2105-1777
+  - family-names: Cataudela
+    given-names: Juan Francisco
+    orcid: https://orcid.org/0000-0002-8428-4877
+  - family-names: González
+    given-names: Maricruz
+  - family-names: Martínez-Penados
+    given-names: Andrea
+    orcid: https://orcid.org/0000-0001-6031-435X
+  - family-names: Rodríguez-García
+    given-names: Esthela
+    orcid: https://orcid.org/0009-0005-7501-724X
+  - family-names: Salas-Murillo
+    given-names: Diego
+  - family-names: Araya-Salas
+    given-names: Marcelo
+    orcid: https://orcid.org/0000-0003-3594-619X
+    affiliation: >-
+      Centro de Investigacion en Neurociencias & Escuela de Biologia,
+      Universidad de Costa Rica, San Jose, Costa Rica
+    email: marcelo.araya@ucr.ac.cr
+version: 1.0.0
+date-released: '2026-11-13'
+license: GPL-2.0-or-later
+repository-code: https://github.com/maRce10/mobbing_ontogeny
+url: https://marce10.github.io/mobbing_ontogeny/
+abstract: >-
+  Data and Bayesian analyses of a playback experiment testing whether
+  passerine birds at Las Cruces Biological Station, Costa Rica, mob
+  vocalizations of a sympatric pygmy-owl (Glaucidium costaricanum) more than
+  those of two allopatric congeners (G. brasilianum and G. passerinum).
+keywords:
+  - mobbing
+  - antipredator behavior
+  - predator recognition
+  - playback experiment
+  - Glaucidium
+  - tropical birds
+# After archiving on Zenodo, add:  doi: <Zenodo DOI>
+# After acceptance, add the paper as preferred-citation.

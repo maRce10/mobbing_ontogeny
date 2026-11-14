@@ -1,0 +1,618 @@
+Occasions: 49 | sites: 31 
+
+2024 2026 
+  41    8 
+
+  Sympatric  Allopatric Allopatric+     Control 
+         12          13          12          12 
+
+ 1  2  4 
+21  6  4 
+Proportion zeros (individuals): 0.5918367 
+Mean/var individuals: 1.285714 6.083333 
+
+===== INDIVIDUOS =====
+ model elpd_diff se_diff p_worse diag_diff       diag_elpd
+    mn       0.0     0.0      NA            5 k_psis > 0.7
+    mp      -0.1     2.1    0.52   N < 100 11 k_psis > 0.7
+
+Diagnostic flags present.
+See ?`loo-glossary` (sections `diag_diff` and `diag_elpd`)
+or https://mc-stan.org/loo/reference/loo-glossary.html.
+Bayesian p-values (P[T(yrep) >= T(y)]):
+zeros  mean   var   max 
+0.353 0.497 0.429 0.386 
+Bayesian p-values (P[T(yrep) >= T(y)]):
+zeros  mean   var   max 
+0.545 0.575 0.563 0.481 
+
+ pois max Rhat: 1.0011 min Bulk_ESS: 6430 min Tail_ESS: 9265 
+                    Estimate Est.Error l-95% CI u-95% CI  Rhat  Bulk_ESS
+Intercept              0.714     0.387   -0.114    1.404 1.000  9170.044
+stimulusAllopatric    -1.172     0.459   -2.099   -0.300 1.000 13758.260
+stimulusAllopatricP   -1.568     0.525   -2.670   -0.598 1.000 10747.727
+stimulusControl       -7.789     2.944  -14.776   -3.485 1.000 11350.720
+year2026               0.114     0.483   -0.852    1.046 1.000 13376.112
+sd(Intercept)          1.120     0.345    0.579    1.925 1.001  6430.344
+                     Tail_ESS
+Intercept           14192.215
+stimulusAllopatric  14743.577
+stimulusAllopatricP 12392.625
+stimulusControl      9264.865
+year2026            14500.018
+sd(Intercept)       10699.291
+ contrast                       ratio lower.HPD upper.HPD
+ Sympatric / Allopatric        3.2136  0.936990       7.0
+ Sympatric / (Allopatric+)     4.7077  1.350409      12.1
+ Sympatric / Control        1478.4563  5.961381  671082.6
+ Allopatric / (Allopatric+)    1.4633  0.300016       4.2
+ Allopatric / Control        458.7980  0.726403  214133.0
+ (Allopatric+) / Control     308.2987  0.938112  142173.8
+
+Results are averaged over the levels of: year 
+Point estimate displayed: median 
+Results are back-transformed from the log scale 
+HPD interval probability: 0.95 
+ contrast                   estimate  lower.HPD upper.HPD
+ Sympatric - Allopatric     1.167406  0.2576862  2.054238
+ Sympatric - (Allopatric+)  1.549192  0.5352978  2.596701
+ Sympatric - Control        7.298754  3.0332093 13.801438
+ Allopatric - (Allopatric+) 0.380719 -0.7384638  1.630745
+ Allopatric - Control       6.128610  1.6925950 12.596128
+ (Allopatric+) - Control    5.731069  1.2925501 12.201935
+
+Results are averaged over the levels of: year 
+Point estimate displayed: median 
+Results are given on the log (not the response) scale. 
+HPD interval probability: 0.95 
+
+ nb max Rhat: 1.0011 min Bulk_ESS: 4231 min Tail_ESS: 8728 
+                    Estimate Est.Error l-95% CI u-95% CI  Rhat  Bulk_ESS
+Intercept              1.065     0.467    0.149    2.006 1.000 10403.196
+stimulusAllopatric    -1.311     0.611   -2.539   -0.118 1.000 19297.856
+stimulusAllopatricP   -1.453     0.643   -2.749   -0.194 1.000 19199.688
+stimulusControl       -7.877     3.074  -15.037   -3.360 1.000 14875.775
+year2026               0.120     0.687   -1.243    1.501 1.001 23021.211
+sd(Intercept)          0.587     0.425    0.025    1.555 1.001  4230.672
+                    Tail_ESS
+Intercept           12749.77
+stimulusAllopatric  14573.14
+stimulusAllopatricP 14351.76
+stimulusControl     10305.78
+year2026            14157.28
+sd(Intercept)        8728.31
+ contrast                       ratio lower.HPD upper.HPD
+ Sympatric / Allopatric        3.7124 0.6402359      10.3
+ Sympatric / (Allopatric+)     4.2242 0.5478623      12.5
+ Sympatric / Control        1585.5466 2.3405137  838217.7
+ Allopatric / (Allopatric+)    1.1521 0.1379906       3.7
+ Allopatric / Control        433.8527 0.4036279  226631.6
+ (Allopatric+) / Control     374.0851 0.4432866  205706.4
+
+Results are averaged over the levels of: year 
+Point estimate displayed: median 
+Results are back-transformed from the log scale 
+HPD interval probability: 0.95 
+ contrast                   estimate  lower.HPD upper.HPD
+ Sympatric - Allopatric     1.311678  0.0933838  2.507289
+ Sympatric - (Allopatric+)  1.440819  0.1729893  2.725963
+ Sympatric - Control        7.368685  2.8866721 14.073524
+ Allopatric - (Allopatric+) 0.141553 -1.2581552  1.516550
+ Allopatric - Control       6.072705  1.5424372 12.831483
+ (Allopatric+) - Control    5.924483  1.2844181 12.630088
+
+Results are averaged over the levels of: year 
+Point estimate displayed: median 
+Results are given on the log (not the response) scale. 
+HPD interval probability: 0.95 
+
+Prior normal(0, 2 ) contrasts (log scale):
+ contrast                   estimate  lower.HPD upper.HPD
+ Sympatric - Allopatric     1.065602  0.2390050  1.957459
+ Sympatric - (Allopatric+)  1.367346  0.4813761  2.407906
+ Sympatric - Control        4.053223  2.2162569  6.232544
+ Allopatric - (Allopatric+) 0.304190 -0.8029900  1.429956
+ Allopatric - Control       3.004602  1.0896771  5.418527
+ (Allopatric+) - Control    2.686985  0.8107068  5.065595
+
+Results are averaged over the levels of: year 
+Point estimate displayed: median 
+Results are given on the log (not the response) scale. 
+HPD interval probability: 0.95 
+
+Prior normal(0, 10 ) contrasts (log scale):
+ contrast                   estimate lower.HPD upper.HPD
+ Sympatric - Allopatric     1.179323  0.272715  2.058239
+ Sympatric - (Allopatric+)  1.556921  0.571009  2.678049
+ Sympatric - Control        9.432169  3.173055 18.778553
+ Allopatric - (Allopatric+) 0.374496 -0.799089  1.621282
+ Allopatric - Control       8.237318  1.867193 17.548855
+ (Allopatric+) - Control    7.871610  1.690844 17.411071
+
+Results are averaged over the levels of: year 
+Point estimate displayed: median 
+Results are given on the log (not the response) scale. 
+HPD interval probability: 0.95 
+Compiling Stan program...
+Start sampling
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
+Chain 1: 
+Chain 1: Gradient evaluation took 2.4e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.24 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: Iteration:    1 / 10000 [  0%]  (Warmup)
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).
+Chain 2: 
+Chain 2: Gradient evaluation took 3.3e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.33 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 2: Iteration:    1 / 10000 [  0%]  (Warmup)
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 3).
+Chain 3: 
+Chain 3: Gradient evaluation took 3.3e-05 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.33 seconds.
+Chain 3: Adjust your expectations accordingly!
+Chain 3: 
+Chain 3: 
+Chain 3: Iteration:    1 / 10000 [  0%]  (Warmup)
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 4).
+Chain 4: 
+Chain 4: Gradient evaluation took 2.7e-05 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.27 seconds.
+Chain 4: Adjust your expectations accordingly!
+Chain 4: 
+Chain 4: 
+Chain 4: Iteration:    1 / 10000 [  0%]  (Warmup)
+Chain 1: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 2: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 3: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 4: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 1: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 2: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 3: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 4: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 1: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 2: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 3: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 4: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 1: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 3: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 4: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 2: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 1: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 1: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 4: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 4: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 3: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 3: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 2: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 2: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 4: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 1: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 2: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 3: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 4: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 1: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 2: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 4: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 3: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 1: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 2: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 4: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 4: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 0.951 seconds (Warm-up)
+Chain 4:                0.876 seconds (Sampling)
+Chain 4:                1.827 seconds (Total)
+Chain 4: 
+Chain 1: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 2: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 3: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 1: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 0.948 seconds (Warm-up)
+Chain 1:                1.172 seconds (Sampling)
+Chain 1:                2.12 seconds (Total)
+Chain 1: 
+Chain 2: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 0.99 seconds (Warm-up)
+Chain 2:                1.144 seconds (Sampling)
+Chain 2:                2.134 seconds (Total)
+Chain 2: 
+Chain 3: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 3: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 0.966 seconds (Warm-up)
+Chain 3:                1.63 seconds (Sampling)
+Chain 3:                2.596 seconds (Total)
+Chain 3: 
+Automatically saving the model object in 'data/processed/models/MORFOESPECIE_pois.rds'
+Automatically saving the model object in 'data/processed/models/MORFOESPECIE_nb.rds'
+
+===== MORFOESPECIE =====
+ model elpd_diff se_diff p_worse diag_diff      diag_elpd
+    mn       0.0     0.0      NA           1 k_psis > 0.7
+    mp      -0.8     0.9    0.82   N < 100 5 k_psis > 0.7
+
+Diagnostic flags present.
+See ?`loo-glossary` (sections `diag_diff` and `diag_elpd`)
+or https://mc-stan.org/loo/reference/loo-glossary.html.
+Bayesian p-values (P[T(yrep) >= T(y)]):
+zeros  mean   var   max 
+0.442 0.496 0.440 0.522 
+Bayesian p-values (P[T(yrep) >= T(y)]):
+zeros  mean   var   max 
+0.572 0.546 0.590 0.660 
+
+ pois max Rhat: 1.0008 min Bulk_ESS: 4220 min Tail_ESS: 6849 
+                    Estimate Est.Error l-95% CI u-95% CI  Rhat  Bulk_ESS
+Intercept              0.545     0.307   -0.125    1.083 1.000 14705.927
+stimulusAllopatric    -1.256     0.457   -2.183   -0.382 1.000 18513.091
+stimulusAllopatricP   -1.131     0.474   -2.118   -0.249 1.000 15989.790
+stimulusControl       -7.350     2.995  -14.353   -2.949 1.000 11067.642
+year2026               0.219     0.463   -0.736    1.082 1.000 17291.566
+sd(Intercept)          0.572     0.338    0.039    1.321 1.001  4219.623
+                     Tail_ESS
+Intercept           14377.102
+stimulusAllopatric  14799.948
+stimulusAllopatricP 12830.004
+stimulusControl      9377.988
+year2026            13638.994
+sd(Intercept)        6848.712
+ contrast                      ratio lower.HPD upper.HPD
+ Sympatric / Allopatric       3.4699 1.0571110       7.7
+ Sympatric / (Allopatric+)    3.0537 0.9386290       7.1
+ Sympatric / Control        942.3359 2.0753342  417848.5
+ Allopatric / (Allopatric+)   0.8817 0.1862603       2.3
+ Allopatric / Control       271.0961 0.3983758  128791.0
+ (Allopatric+) / Control    299.9533 0.8278240  142844.4
+
+Results are averaged over the levels of: year 
+Point estimate displayed: median 
+Results are back-transformed from the log scale 
+HPD interval probability: 0.95 
+ contrast                    estimate  lower.HPD upper.HPD
+ Sympatric - Allopatric      1.244124  0.3590573  2.155664
+ Sympatric - (Allopatric+)   1.116341  0.2225132  2.084106
+ Sympatric - Control         6.848362  2.3017777 13.165430
+ Allopatric - (Allopatric+) -0.125885 -1.2532331  0.957833
+ Allopatric - Control        5.602474  0.9747131 11.979666
+ (Allopatric+) - Control     5.703627  1.3757773 12.343341
+
+Results are averaged over the levels of: year 
+Point estimate displayed: median 
+Results are given on the log (not the response) scale. 
+HPD interval probability: 0.95 
+
+ nb max Rhat: 1.0007 min Bulk_ESS: 5159 min Tail_ESS: 8463 
+                    Estimate Est.Error l-95% CI u-95% CI  Rhat  Bulk_ESS
+Intercept              0.633     0.360   -0.080    1.353 1.000 14864.896
+stimulusAllopatric    -1.262     0.529   -2.335   -0.249 1.000 21141.564
+stimulusAllopatricP   -1.100     0.542   -2.195   -0.047 1.000 17285.625
+stimulusControl       -7.281     2.956  -14.231   -2.958 1.000 10652.957
+year2026               0.148     0.570   -1.018    1.238 1.000 19697.858
+sd(Intercept)          0.437     0.325    0.017    1.203 1.001  5159.059
+                     Tail_ESS
+Intercept           15372.153
+stimulusAllopatric  14638.799
+stimulusAllopatricP 13659.409
+stimulusControl      9500.377
+year2026            13896.683
+sd(Intercept)        8463.260
+ contrast                      ratio lower.HPD upper.HPD
+ Sympatric / Allopatric       3.4888 0.7256374       8.6
+ Sympatric / (Allopatric+)    2.9849 0.6871647       7.5
+ Sympatric / Control        901.5637 1.6010594  365214.4
+ Allopatric / (Allopatric+)   0.8481 0.1284239       2.4
+ Allopatric / Control       252.8961 0.5487683  104640.6
+ (Allopatric+) / Control    297.9130 0.7864801  132793.8
+
+Results are averaged over the levels of: year 
+Point estimate displayed: median 
+Results are back-transformed from the log scale 
+HPD interval probability: 0.95 
+ contrast                    estimate  lower.HPD upper.HPD
+ Sympatric - Allopatric      1.249554  0.2722789  2.349929
+ Sympatric - (Allopatric+)   1.093574  0.0471863  2.194878
+ Sympatric - Control         6.804131  2.4568797 13.084259
+ Allopatric - (Allopatric+) -0.164768 -1.3590608  1.092604
+ Allopatric - Control        5.532979  1.0801145 11.913020
+ (Allopatric+) - Control     5.696801  1.3682812 12.201756
+
+Results are averaged over the levels of: year 
+Point estimate displayed: median 
+Results are given on the log (not the response) scale. 
+HPD interval probability: 0.95 
+Compiling Stan program...
+Start sampling
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
+Chain 1: 
+Chain 1: Gradient evaluation took 4.9e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.49 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: Iteration:    1 / 10000 [  0%]  (Warmup)
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).
+Chain 2: 
+Chain 2: Gradient evaluation took 3.1e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.31 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 2: Iteration:    1 / 10000 [  0%]  (Warmup)
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 3).
+Chain 3: 
+Chain 3: Gradient evaluation took 3e-05 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.3 seconds.
+Chain 3: Adjust your expectations accordingly!
+Chain 3: 
+Chain 3: 
+Chain 3: Iteration:    1 / 10000 [  0%]  (Warmup)
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 4).
+Chain 4: 
+Chain 4: Gradient evaluation took 2.9e-05 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.29 seconds.
+Chain 4: Adjust your expectations accordingly!
+Chain 4: 
+Chain 4: 
+Chain 4: Iteration:    1 / 10000 [  0%]  (Warmup)
+Chain 3: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 1: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 2: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 3: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 4: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 2: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 1: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 3: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 4: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 2: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 1: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 3: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 4: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 2: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 1: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 4: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 3: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 3: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 2: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 2: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 1: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 1: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 4: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 4: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 2: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 3: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 1: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 4: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 2: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 3: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 1: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 4: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 2: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 3: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 1: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 4: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 2: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 3: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 1: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 2: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 1.093 seconds (Warm-up)
+Chain 2:                1.128 seconds (Sampling)
+Chain 2:                2.221 seconds (Total)
+Chain 2: 
+Chain 4: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 3: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 1.057 seconds (Warm-up)
+Chain 3:                1.307 seconds (Sampling)
+Chain 3:                2.364 seconds (Total)
+Chain 3: 
+Chain 4: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 1.241 seconds (Warm-up)
+Chain 4:                1.185 seconds (Sampling)
+Chain 4:                2.426 seconds (Total)
+Chain 4: 
+Chain 1: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 1.189 seconds (Warm-up)
+Chain 1:                1.309 seconds (Sampling)
+Chain 1:                2.498 seconds (Total)
+Chain 1: 
+
+Prior normal(0, 2 ) contrasts (log scale):
+ contrast                    estimate  lower.HPD upper.HPD
+ Sympatric - Allopatric      1.146089  0.2728438  2.007697
+ Sympatric - (Allopatric+)   1.004539  0.1625266  1.912708
+ Sympatric - Control         3.675407  1.7853781  5.868487
+ Allopatric - (Allopatric+) -0.139736 -1.1839932  0.917422
+ Allopatric - Control        2.526853  0.5603170  4.839998
+ (Allopatric+) - Control     2.664686  0.6133121  4.893523
+
+Results are averaged over the levels of: year 
+Point estimate displayed: median 
+Results are given on the log (not the response) scale. 
+HPD interval probability: 0.95 
+Compiling Stan program...
+Start sampling
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
+Chain 1: 
+Chain 1: Gradient evaluation took 3.4e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.34 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: Iteration:    1 / 10000 [  0%]  (Warmup)
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).
+Chain 2: 
+Chain 2: Gradient evaluation took 3.1e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.31 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 2: Iteration:    1 / 10000 [  0%]  (Warmup)
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 3).
+Chain 3: 
+Chain 3: Gradient evaluation took 3.1e-05 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.31 seconds.
+Chain 3: Adjust your expectations accordingly!
+Chain 3: 
+Chain 3: 
+Chain 3: Iteration:    1 / 10000 [  0%]  (Warmup)
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 4).
+Chain 4: 
+Chain 4: Gradient evaluation took 2.8e-05 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.28 seconds.
+Chain 4: Adjust your expectations accordingly!
+Chain 4: 
+Chain 4: 
+Chain 4: Iteration:    1 / 10000 [  0%]  (Warmup)
+Chain 1: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 3: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 2: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 4: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 3: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 1: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 2: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 4: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 3: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 2: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 1: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 4: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 3: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 2: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 1: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 4: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 3: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 3: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 2: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 2: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 3: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 1: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 1: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 4: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 4: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 3: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 2: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 4: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 3: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 1: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 4: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 3: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 2: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 4: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 3: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 1.937 seconds (Warm-up)
+Chain 3:                1.316 seconds (Sampling)
+Chain 3:                3.253 seconds (Total)
+Chain 3: 
+Chain 1: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 4: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 2: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 1: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 4: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 2.269 seconds (Warm-up)
+Chain 4:                1.524 seconds (Sampling)
+Chain 4:                3.793 seconds (Total)
+Chain 4: 
+Chain 2: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 1: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 2: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 2.054 seconds (Warm-up)
+Chain 2:                2.588 seconds (Sampling)
+Chain 2:                4.642 seconds (Total)
+Chain 2: 
+Chain 1: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 2.244 seconds (Warm-up)
+Chain 1:                2.631 seconds (Sampling)
+Chain 1:                4.875 seconds (Total)
+Chain 1: 
+
+Prior normal(0, 10 ) contrasts (log scale):
+ contrast                    estimate  lower.HPD upper.HPD
+ Sympatric - Allopatric      1.262024  0.3823136  2.198426
+ Sympatric - (Allopatric+)   1.131637  0.2545624  2.115085
+ Sympatric - Control         8.966624  2.4435359 18.384219
+ Allopatric - (Allopatric+) -0.128699 -1.2373554  0.972427
+ Allopatric - Control        7.696143  1.1811903 17.315330
+ (Allopatric+) - Control     7.805367  1.3597941 17.470425
+
+Results are averaged over the levels of: year 
+Point estimate displayed: median 
+Results are given on the log (not the response) scale. 
+HPD interval probability: 0.95 
+Warning messages:
+1: Found 5 observations with a pareto_k > 0.7 in model 'mp'. We recommend to set 'moment_match = TRUE' in order to perform moment matching for problematic observations.  
+2: Found 1 observations with a pareto_k > 0.7 in model 'mn'. We recommend to set 'moment_match = TRUE' in order to perform moment matching for problematic observations.  
+R version 4.6.1 (2026-06-24)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
+
+time zone: America/Costa_Rica
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] bayesplot_1.15.0 ggplot2_4.0.3    loo_2.10.1       emmeans_2.0.4   
+[5] brms_2.23.0      Rcpp_1.1.2      
+
+loaded via a namespace (and not attached):
+ [1] bridgesampling_1.2-1 tensorA_0.36.2.1     tidyr_1.3.2         
+ [4] generics_0.1.4       stringi_1.8.9        lattice_0.22-9      
+ [7] digest_0.6.39        magrittr_2.0.5       grid_4.6.1          
+[10] estimability_2.0.0   RColorBrewer_1.1-3   mvtnorm_1.4-2       
+[13] plyr_1.8.9           jsonlite_2.0.0       Matrix_1.7-6        
+[16] processx_3.9.0       pkgbuild_1.4.8       backports_1.5.1     
+[19] ps_1.9.3             gridExtra_2.3.1      Brobdingnag_1.2-9   
+[22] purrr_1.2.2          QuickJSR_1.10.0      scales_1.4.0        
+[25] codetools_0.2-20     abind_1.4-8          cli_3.6.6           
+[28] rlang_1.3.0          withr_3.0.3          otel_0.2.0          
+[31] StanHeaders_2.32.10  tools_4.6.1          rstan_2.32.7        
+[34] inline_0.3.21        parallel_4.6.1       reshape2_1.4.5      
+[37] rstantools_2.7.0     checkmate_2.3.4      coda_0.19-4.1       
+[40] dplyr_1.2.1          curl_8.0.0           vctrs_0.7.3         
+[43] posterior_1.7.0      R6_2.6.1             matrixStats_1.5.0   
+[46] stats4_4.6.1         lifecycle_1.0.5      stringr_1.6.0       
+[49] V8_8.2.0             callr_3.8.0          pkgconfig_2.0.3     
+[52] RcppParallel_6.2.0   pillar_1.11.1        gtable_0.3.6        
+[55] glue_1.8.1           tibble_3.3.1         tidyselect_1.2.1    
+[58] farver_2.1.2         xtable_1.8-8         nlme_3.1-170        
+[61] labeling_0.4.3       compiler_4.6.1       S7_0.2.2            
+[64] distributional_0.8.1

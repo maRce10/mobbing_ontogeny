@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - scripts/1_statistical_analysis.qmd
+    - scripts/mobbing_ontogeny.qmd
+
+execute:
+  freeze: auto
+
+website:
+  title: "Mobbing ontogeny"
+  site-url: https://marce10.github.io/mobbing_ontogeny/
+  repo-url: https://github.com/maRce10/mobbing_ontogeny
+  page-navigation: true
+  navbar:
+    background: "#ffffff"
+    foreground: "#408AB4"
+    left:
+      - href: index.qmd
+        text: Home
+      - href: scripts/1_statistical_analysis.qmd
+        text: Statistical analysis
+      - href: scripts/mobbing_ontogeny.qmd
+        text: Preliminary analysis (2024)
+    right:
+      - icon: github
+        href: https://github.com/maRce10/mobbing_ontogeny
+        aria-label: GitHub repository
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    include-after-body: _figure-download.html
