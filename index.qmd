@@ -5,7 +5,7 @@ author: "Natalie V. Sánchez, Juan Francisco Cataudela, Maricruz González, Andr
 toc: false
 ---
 
-<p><a href="https://doi.org/10.5281/zenodo.24247609"><img src="https://zenodo.org/badge/743732923.svg" alt="DOI"></a></p>
+<p><a href="https://doi.org/10.5281/zenodo.24247609"><img src="https://zenodo.org/badge/743732923.svg" alt="DOI"></a> <a href="https://github.com/maRce10/mobbing_ontogeny/blob/master/LICENSE"><img src="https://img.shields.io/badge/code-GPL%20%E2%89%A5%202-blue" alt="Code license: GPL (>= 2)"></a> <a href="https://creativecommons.org/licenses/by/4.0/"><img src="https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey" alt="Data license: CC BY 4.0"></a> <a href="https://cran.r-project.org/"><img src="https://img.shields.io/badge/R-%E2%89%A5%204.6-276DC3?logo=r" alt="R >= 4.6"></a> <a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project status: Active"></a></p>
 
 This site contains the analyses behind the manuscript (under review). We broadcast calls of three closely related pygmy-owls at Las Cruces Biological Station, Costa Rica, to test whether acoustic predator recognition in passerine birds depends on local coexistence with the predator: *Glaucidium costaricanum* (sympatric), *G. brasilianum* (allopatric, with range overlap elsewhere) and *G. passerinum* (strictly allopatric), plus the song of a non-predatory warbler, *Basileuterus delattrii*, as control. We counted the birds and species that responded in 49 playback trials at 31 sites (2024 and 2026).
 

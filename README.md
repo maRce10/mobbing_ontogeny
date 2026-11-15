@@ -2,6 +2,10 @@
 
 [![Website](https://img.shields.io/badge/website-analysis%20reports-408AB4)](https://marce10.github.io/mobbing_ontogeny/)
 [![DOI](https://zenodo.org/badge/743732923.svg)](https://doi.org/10.5281/zenodo.24247609)
+[![Code license: GPL (>= 2)](https://img.shields.io/badge/code-GPL%20%E2%89%A5%202-blue)](https://github.com/maRce10/mobbing_ontogeny/blob/master/LICENSE)
+[![Data license: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
+[![R >= 4.6](https://img.shields.io/badge/R-%E2%89%A5%204.6-276DC3?logo=r)](https://cran.r-project.org/)
+[![Project status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Publish website](https://github.com/maRce10/mobbing_ontogeny/actions/workflows/publish.yml/badge.svg)](https://github.com/maRce10/mobbing_ontogeny/actions/workflows/publish.yml)
 
 Code and data to reproduce the analyses and figures of:
