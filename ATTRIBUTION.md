@@ -25,15 +25,18 @@ Attribute as:
 The owl and warbler vocalizations used to build the playback stimuli were
 obtained from [Xeno-canto](https://www.xeno-canto.org/). They are **not**
 redistributed in this repository and are not covered by the licences above.
-Each Xeno-canto recording carries its own Creative Commons licence; cite each
-one by its XC catalogue number and recordist.
+Each Xeno-canto recording carries its own Creative Commons licence.
 
-| Species | Use | XC number | Recordist | Licence |
-|---|---|---|---|---|
-| *Glaucidium costaricanum* | Stimulus (3 exemplars) | *to complete* | *to complete* | *to complete* |
-| *Glaucidium brasilianum* | Stimulus (3 exemplars) | *to complete* | *to complete* | *to complete* |
-| *Glaucidium passerinum* | Stimulus (3 exemplars) | *to complete* | *to complete* | *to complete* |
-| *Basileuterus delattrii* | Control (3 exemplars) | *to complete* | *to complete* | *to complete* |
+The catalogue numbers, recordists and licences of the 12 recordings used
+(three exemplars of each of the four species below) are available from the
+authors on request (marcelo.araya@ucr.ac.cr).
+
+| Species | Use |
+|---|---|
+| *Glaucidium costaricanum* | Stimulus (3 exemplars) |
+| *Glaucidium brasilianum* | Stimulus (3 exemplars) |
+| *Glaucidium passerinum* | Stimulus (3 exemplars) |
+| *Basileuterus delattrii* | Control (3 exemplars) |
 
 Photographs in Figure 1 of the paper were provided by the Cornell Lab of
 Ornithology and A. Delgado and are not part of this repository.
