@@ -5,6 +5,8 @@ author: "Natalie V. Sánchez, Juan Francisco Cataudela, Maricruz González, Andr
 toc: false
 ---
 
+[![DOI](https://zenodo.org/badge/743732923.svg)](https://doi.org/10.5281/zenodo.24247609)
+
 This site contains the analyses behind the manuscript (under review). We broadcast calls of three closely related pygmy-owls at Las Cruces Biological Station, Costa Rica, to test whether acoustic predator recognition in passerine birds depends on local coexistence with the predator: *Glaucidium costaricanum* (sympatric), *G. brasilianum* (allopatric, with range overlap elsewhere) and *G. passerinum* (strictly allopatric), plus the song of a non-predatory warbler, *Basileuterus delattrii*, as control. We counted the birds and species that responded in 49 playback trials at 31 sites (2024 and 2026).
 
 ## Analysis reports

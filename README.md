@@ -1,6 +1,7 @@
 # Mobbing behavior in tropical passerine birds: an innate and learned behavior
 
 [![Website](https://img.shields.io/badge/website-analysis%20reports-408AB4)](https://marce10.github.io/mobbing_ontogeny/)
+[![DOI](https://zenodo.org/badge/743732923.svg)](https://doi.org/10.5281/zenodo.24247609)
 [![Publish website](https://github.com/maRce10/mobbing_ontogeny/actions/workflows/publish.yml/badge.svg)](https://github.com/maRce10/mobbing_ontogeny/actions/workflows/publish.yml)
 
 Code and data to reproduce the analyses and figures of:
@@ -39,6 +40,10 @@ output/
 ## Rebuilding the website
 
 Render locally with `quarto render` (code results are cached in `_freeze/`), then commit `_freeze/`. Pushing to `master` triggers the workflow, which renders the site from the cached results and deploys it to GitHub Pages.
+
+## How to cite
+
+> Sánchez N. V., Cataudela J. F., González M., Martínez-Penados A., Rodríguez-García E., Salas-Murillo D., Araya-Salas M. (2026). Code and data for "Mobbing behavior in tropical passerine birds: an innate and learned behavior". Zenodo. https://doi.org/10.5281/zenodo.24247609
 
 ## License
 

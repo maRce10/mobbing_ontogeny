@@ -18,7 +18,7 @@ Attribute as:
 > Sánchez N. V., Cataudela J. F., González M., Martínez-Penados A.,
 > Rodríguez-García E., Salas-Murillo D., Araya-Salas M. (2026). Code and data
 > for "Mobbing behavior in tropical passerine birds: an innate and learned
-> behavior". https://github.com/maRce10/mobbing_ontogeny
+> behavior". Zenodo. https://doi.org/10.5281/zenodo.24247609
 
 ## Third-party recordings — NOT included
 

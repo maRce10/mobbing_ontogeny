@@ -30,6 +30,7 @@ authors:
       Centro de Investigacion en Neurociencias & Escuela de Biologia,
       Universidad de Costa Rica, San Jose, Costa Rica
     email: marcelo.araya@ucr.ac.cr
+doi: 10.5281/zenodo.24247609
 version: 1.0.0
 date-released: '2026-11-13'
 license: GPL-2.0-or-later
@@ -47,5 +48,4 @@ keywords:
   - playback experiment
   - Glaucidium
   - tropical birds
-# After archiving on Zenodo, add:  doi: <Zenodo DOI>
 # After acceptance, add the paper as preferred-citation.
