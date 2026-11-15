@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll("main img").forEach(function (img) {
     var src = img.getAttribute("src");
     if (!src || src.indexOf("data:") === 0) return;
+    if (img.closest("a")) return; // skip badges and other linked images
 
     var fileName = decodeURIComponent(src.split("/").pop().split("?")[0]);
 
