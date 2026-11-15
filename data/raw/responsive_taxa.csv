@@ -1,0 +1,29 @@
+stimulus,family,taxon,n
+*Glaucidium costaricanum*,Trochilidae,*Amazilia tzacatl*,1
+,Pipridae,Manakins,2
+,Parulidae,*Basileuterus delattrii*,10
+,Tyrannidae,*Empidonax flavescens*,2
+,Turdidae,*Turdus grayi*,1
+,Passerellidae,*Arremon aurantiirostris*,1
+,Parulidae,*Mniotilta varia*,1
+,Thraupidae,Tanagers,5
+,Thraupidae,*Tangara icterocephala*,1
+,Trochilidae,*Polyerata decora*,1
+,Troglodytidae,*Pheugopedius rutilus*,2
+,Thraupidae,*Coereba flaveola*,1
+,Parulidae,Warbler,1
+,Thraupidae,*Ramphocelus passerinii*,5
+,Thraupidae,*Saltator maximus*,1
+*Glaucidium brasilianum*,Trochilidae,*Amazilia tzacatl*,1
+,Turdidae,*Turdus grayi*,1
+,Passerellidae,*Arremon aurantiirostris*,2
+,Parulidae,*Basileuterus delattrii*,2
+,Thraupidae,Tanagers,1
+,Thamnophilidae,*Dysithamnus mentalis*,2
+*Glaucidium passerinum*,Trochilidae,*Amazilia tzacatl*,2
+,Passerellidae,*Arremon aurantiirostris*,2
+,Parulidae,*Setophaga pensylvanica*,1
+,Parulidae,*Basileuterus delattrii*,2
+,Parulidae,Warbler,1
+,Thraupidae,Tanagers,2
+*Basileuterus delattrii* (control),,No response,0

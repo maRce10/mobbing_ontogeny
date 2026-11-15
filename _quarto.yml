@@ -23,7 +23,7 @@ website:
       - href: scripts/1_statistical_analysis.qmd
         text: Statistical analysis
       - href: scripts/2_supplementary_materials.qmd
-        text: Supplementary materials
+        text: Supplementary material
     right:
       - icon: github
         href: https://github.com/maRce10/mobbing_ontogeny

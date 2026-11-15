@@ -13,8 +13,8 @@ We broadcast calls of three pygmy-owls that differ in their familiarity to the l
 
 The rendered analysis reports, with all code, results and figures, are available at **[marce10.github.io/mobbing_ontogeny](https://marce10.github.io/mobbing_ontogeny/)**:
 
-- [Statistical analysis](https://marce10.github.io/mobbing_ontogeny/scripts/1_statistical_analysis.html): Bayesian mixed models, model checking, prior sensitivity and pairwise contrasts (Tables 1–2, Figs. 3–4, Supplementary materials 2–4)
-- [Supplementary materials](https://marce10.github.io/mobbing_ontogeny/scripts/2_supplementary_materials.html): Supplementary materials 1–4 of the manuscript
+- [Statistical analysis](https://marce10.github.io/mobbing_ontogeny/scripts/1_statistical_analysis.html): Bayesian mixed models, model checking, prior sensitivity and pairwise contrasts (Tables 1–2, Figs. 3–4, Supplementary material Tables S2–S14 and Figs. S1–S4)
+- [Supplementary material](https://marce10.github.io/mobbing_ontogeny/scripts/2_supplementary_materials.html): the manuscript's Supplementary material (Tables S1–S14, Figs. S1–S4)
 
 ## Repository structure
 
@@ -24,11 +24,12 @@ _figure-download.html                     Adds a download button below each figu
 .github/workflows/publish.yml             GitHub Actions workflow that builds the website and deploys it to GitHub Pages
 scripts/
   1_statistical_analysis.qmd              Main analysis (models, diagnostics, contrasts, figures)
-  2_supplementary_materials.qmd           Supplementary materials 1-4 (website page)
+  2_supplementary_materials.qmd           Supplementary material (website page)
   reviewer_reanalysis.R                   Stand-alone script version of the main models
-  supplementary_reanalysis.R              Builds Supplementary materials 2-4
+  supplementary_reanalysis.R              Builds manuscript/Supplementary_material.docx
 data/
   raw/data_v2.csv                         One row per playback trial (date, team, time, point, stimulus, responding birds and species, notes)
+  raw/responsive_taxa.csv                 Responsive taxa and number of individuals per stimulus (Table S1)
   processed/models/                       Cached brms models (not on GitHub; refitted by the analysis report)
 output/
   figures/                                Figures used on the website (300 dpi)
