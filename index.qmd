@@ -10,6 +10,7 @@ This site contains the analyses behind the manuscript (under review). We broadca
 ## Analysis reports
 
 - **[Statistical analysis](scripts/1_statistical_analysis.qmd)**: sampling design, Bayesian mixed models of the number of responding birds and species (stimulus and year as fixed effects, site as random effect), Poisson vs. negative binomial comparison, prior sensitivity, MCMC diagnostics and pairwise contrasts (Tables 1–2, Figs. 3–4, Supplementary materials 2–4)
+- **[Supplementary materials](scripts/2_supplementary_materials.qmd)**: responsive bird taxa (SM1), trials per stimulus, year and exemplar (SM2), full parameter estimates, contrasts and prior sensitivity (SM3), trace plots and posterior predictive checks (SM4)
 
 ## Main results
 

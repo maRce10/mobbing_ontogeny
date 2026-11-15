@@ -1,0 +1,193 @@
+---
+title: "Supplementary materials"
+subtitle: "Mobbing responses of tropical passerines to sympatric and allopatric owl vocalizations"
+author: "Marcelo Araya-Salas"
+date: "`r Sys.Date()`"
+toc: true
+toc-depth: 2
+toc-location: left
+format:
+  html:
+    css: qmd.css
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, echo = FALSE, message = FALSE, warning = FALSE}
+
+knitr::opts_knit$set(root.dir = "..")
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+```
+
+```{r load}
+
+suppressPackageStartupMessages(library(brms))
+
+d <- read.csv("data/raw/data_v2.csv", check.names = FALSE)
+names(d) <- trimws(names(d))
+d$year <- substr(d$FECHA, 7, 10)
+
+lab <- c(
+  GLCR = "Sympatric (*G. costaricanum*)",
+  GLBR = "Allopatric (*G. brasilianum*)",
+  GLEU = "Allopatric+ (*G. passerinum*)",
+  BADE = "Control (*B. delattrii*)"
+)
+
+resp_lab <- c(
+  INDIVIDUOS = "number of responding birds",
+  MORFOESPECIE = "number of responding species and morphospecies"
+)
+
+fixef_table <- function(file, caption) {
+  s <- summary(readRDS(file))
+  r <- rbind(s$fixed, s$random$site)
+  r <- r[, c("Estimate", "l-95% CI", "u-95% CI", "Rhat", "Bulk_ESS", "Tail_ESS")]
+  rownames(r)[rownames(r) == "Intercept1"] <- "sd(Intercept)"
+  r$Bulk_ESS <- round(r$Bulk_ESS)
+  r$Tail_ESS <- round(r$Tail_ESS)
+  knitr::kable(r, digits = 3, caption = caption,
+               col.names = c("Estimate", "l-95% CrI", "u-95% CrI", "R-hat", "Bulk ESS", "Tail ESS"))
+}
+
+contrast_table <- function(file, caption) {
+  x <- read.csv(file)
+  x <- x[, c("contrast", "estimate", "lower.HPD", "upper.HPD")]
+  x$contrast <- gsub("Allopatric\\+", "Allopatric+", x$contrast)
+  credible <- sign(x$lower.HPD) == sign(x$upper.HPD)
+  x$contrast <- ifelse(credible, paste0("**", x$contrast, "**"), x$contrast)
+  knitr::kable(x, digits = 3, caption = caption, row.names = FALSE,
+               col.names = c("Contrast", "Estimate", "95% HPD lower", "95% HPD upper"))
+}
+
+```
+
+# Supplementary material 1
+
+Bird taxa exhibiting mobbing responses to playback of owl calls and control at Las Cruces Biological Station, San Vito, Costa Rica. Responsive taxa are confirmed species or morphospecies grouped by family.
+
+| Stimulus species | Family | Scientific / common name | N° of individuals |
+|---|---|---|---|
+| *Glaucidium costaricanum* | Trochilidae | *Amazilia tzacatl* | 1 |
+| | Pipridae | Manakins | 2 |
+| | Parulidae | *Basileuterus delattrii* | 10 |
+| | Tyrannidae | *Empidonax flavescens* | 2 |
+| | Turdidae | *Turdus grayi* | 1 |
+| | Passerellidae | *Arremon aurantiirostris* | 1 |
+| | Parulidae | *Mniotilta varia* | 1 |
+| | Thraupidae | Tanagers | 5 |
+| | Thraupidae | *Tangara icterocephala* | 1 |
+| | Trochilidae | *Polyerata decora* | 1 |
+| | Troglodytidae | *Pheugopedius rutilus* | 2 |
+| | Thraupidae | *Coereba flaveola* | 1 |
+| | Parulidae | Warbler | 1 |
+| | Thraupidae | *Ramphocelus passerinii* | 5 |
+| | Thraupidae | *Saltator maximus* | 1 |
+| *Glaucidium brasilianum* | Trochilidae | *Amazilia tzacatl* | 1 |
+| | Turdidae | *Turdus grayi* | 1 |
+| | Passerellidae | *Arremon aurantiirostris* | 2 |
+| | Parulidae | *Basileuterus delattrii* | 2 |
+| | Thraupidae | Tanagers | 1 |
+| | Thamnophilidae | *Dysithamnus mentalis* | 2 |
+| *Glaucidium passerinum* | Trochilidae | *Amazilia tzacatl* | 2 |
+| | Passerellidae | *Arremon aurantiirostris* | 2 |
+| | Parulidae | *Setophaga pensylvanica* | 1 |
+| | Parulidae | *Basileuterus delattrii* | 2 |
+| | Parulidae | Warbler | 1 |
+| | Thraupidae | Tanagers | 2 |
+| *Basileuterus delattrii* (control) | | No response | 0 |
+
+# Supplementary material 2
+
+Number of playback trials per stimulus, year and exemplar (recording of a different individual). All 2024 trials used exemplar 1.
+
+```{r sm2}
+
+tab <- do.call(rbind, lapply(names(lab), function(s) {
+  n24 <- sum(d$ESTIMULO == s & d$year == "2024")
+  n26 <- sum(d$ESTIMULO == s & d$year == "2026")
+  data.frame(Stimulus = lab[s], a = n24, b = n26 / 2, c = n26 / 2, Total = n24 + n26)
+}))
+
+knitr::kable(tab, row.names = FALSE,
+             col.names = c("Stimulus", "2024 (exemplar 1)", "2026 (exemplar 2)", "2026 (exemplar 3)", "Total"))
+
+team <- ifelse(d$EQUIPO == 3, 2, d$EQUIPO)
+site_n <- table(table(paste0("T", team, "_P", d$PUNTO)))
+
+```
+
+Sites received one (`r site_n[["1"]]` sites), two (`r site_n[["2"]]` sites) or four (`r site_n[["4"]]` sites) trials, always on different days (`r nrow(d)` trials at `r sum(site_n)` sites).
+
+# Supplementary material 3
+
+## Parameter estimates
+
+Models include stimulus and year as fixed effects and site as a random intercept. Reference levels: sympatric stimulus, 2024.
+
+```{r sm3-fixef, results = "asis"}
+
+k <- 1
+for (r in names(resp_lab)) {
+  fams <- c(pois = "Poisson", nb = "negative binomial")
+  for (fm in names(fams)) {
+    fam <- fams[[fm]]
+    print(fixef_table(
+      file.path("data/processed/models", paste0(r, "_", fm, ".rds")),
+      sprintf("Table S3.%d. Parameter estimates of the %s model of the %s.", k, fam, resp_lab[r])
+    ))
+    cat("\n\n")
+    k <- k + 1
+  }
+}
+
+```
+
+## Pairwise contrasts and prior sensitivity
+
+Contrasts are on the log scale; contrasts whose 95% HPD interval excludes zero are shown in bold.
+
+```{r sm3-contrasts, results = "asis"}
+
+specs <- list(
+  c("pois_prior2", "Poisson model, normal(0, 2) priors"),
+  c("pois", "Poisson model, normal(0, 6) priors (main text)"),
+  c("pois_prior10", "Poisson model, normal(0, 10) priors"),
+  c("nb", "negative binomial model, normal(0, 6) priors")
+)
+
+for (r in names(resp_lab)) {
+  for (p in specs) {
+    print(contrast_table(
+      file.path("output/reanalysis", sprintf("contrasts_%s_%s.csv", r, p[1])),
+      sprintf("Table S3.%d. Pairwise contrasts for the %s: %s.", k, resp_lab[r], p[2])
+    ))
+    cat("\n\n")
+    k <- k + 1
+  }
+}
+
+```
+
+# Supplementary material 4
+
+![Trace plots of the Poisson model of the number of responding birds.](../output/reanalysis/trace_INDIVIDUOS_pois.png)
+
+![Trace plots of the Poisson model of the number of responding species.](../output/reanalysis/trace_MORFOESPECIE_pois.png)
+
+![Posterior predictive checks (observed vs. 500 simulated count distributions) for the number of responding birds.](../output/reanalysis/ppc_INDIVIDUOS.png)
+
+![Posterior predictive checks for the number of responding species.](../output/reanalysis/ppc_MORFOESPECIE.png)
+
+<div class="alert alert-info">
+
+# Session information {.unnumbered .unlisted}
+
+```{r session info, echo = FALSE}
+
+sessionInfo()
+
+```
+
+</div>
