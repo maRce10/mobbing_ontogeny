@@ -293,10 +293,17 @@ for (resp in names(responses)) {
 
 ------------------------------------------------------------------------
 
-# Session information {.unnumbered .unlisted}
+::: {.callout-note collapse="true"}
+## Session information {.unnumbered .unlisted}
 
-```{r session info, echo = FALSE}
+```{r session info}
+#| echo: false
 
-sessionInfo()
-
+# if devtools is installed use devtools::session_info()
+if (requireNamespace("devtools", quietly = TRUE)) {
+  devtools::session_info()
+} else {
+  sessionInfo()
+}
 ```
+:::

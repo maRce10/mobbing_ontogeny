@@ -152,14 +152,17 @@ for (r in names(resp_lab)) {
 
 ![Figure S4. Posterior predictive checks for the number of responding species.](../output/reanalysis/ppc_MORFOESPECIE.png)
 
-<div class="alert alert-info">
+::: {.callout-note collapse="true"}
+## Session information {.unnumbered .unlisted}
 
-# Session information {.unnumbered .unlisted}
+```{r session info}
+#| echo: false
 
-```{r session info, echo = FALSE}
-
-sessionInfo()
-
+# if devtools is installed use devtools::session_info()
+if (requireNamespace("devtools", quietly = TRUE)) {
+  devtools::session_info()
+} else {
+  sessionInfo()
+}
 ```
-
-</div>
+:::
